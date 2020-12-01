@@ -95,9 +95,39 @@ public class Voo {
 		}
 	}
 	
+	//metodo que retorna a quantidade de assentos disponiveis
+	public int numAssentosDisponiveis() {
+		int i;
+		int numAssentos=0;
+		for(i=0;i<NUM_ASSENTOS;i++) {
+			if(this.assentos[i])
+				numAssentos++;
+		}
+		
+		return numAssentos;
+	}
+	
 	
 	@Override
 	public int hashCode() {
-		return this.destino.hashCode();
+		return this.horario.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o==this)
+			return true;
+		
+		if (!(o instanceof Voo))
+			return false;
+		
+		Voo other = (Voo) o;
+		return this.horario.equals(other.horario);
+	}
+	
+	@Override
+	public String toString() {
+		return (this.origem+" - "+this.destino+" - "+this.valorPassagem+" - "+this.data
+				+" - "+this.horario+" - "+numAssentosDisponiveis());
 	}
 }
