@@ -1,6 +1,8 @@
 package Voos;
 
 public class Voo {
+	private static final int NUM_ASSENTOS = 60;
+	
 	//cidade de origem do voo
 	private String origem;
 	
@@ -10,27 +12,30 @@ public class Voo {
 	//valor da passagem
 	private double valorPassagem;
 	
-	//portao de embarque do voo
-	private String portao;
-	
 	//data do voo
 	private String data;
 	
 	//horario do voo
 	private String horario;
-
+	
+	/**Assentos disponiveis no voo;
+	 * true = assento disponível
+	 * false = assento não disponível
+	 */
+	private boolean assentos[] = new boolean[NUM_ASSENTOS];
+	
 	
 	//metodos contrutores da classe
-	public Voo(String origem, String destino, double valorPassagem, String portao, String data, String horario) {
+	public Voo(String origem, String destino, double valorPassagem, String data, String horario) {
 		this.origem = origem;
 		this.destino = destino;
 		this.valorPassagem = valorPassagem;
-		this.portao = portao;
 		this.data = data;
 		this.horario = horario;
+		geraAssentos();
 	}
-	public Voo(String origem, String destino, double valorPassagem, String portao) {
-		this(origem,destino,valorPassagem,portao, null, null);
+	public Voo(String origem, String destino, double valorPassagem, String horario) {
+		this(origem,destino,valorPassagem, null, horario);
 	}
 	
 	
@@ -58,14 +63,6 @@ public class Voo {
 		this.valorPassagem = valorPassagem;
 	}
 
-	//metodos get e set do atributo portao
-	public String getPortao() {
-		return portao;
-	}
-	public void setPortao(String portao) {
-		this.portao = portao;
-	}
-
 	//metodos get e set do atributo data
 	public String getData() {
 		return data;
@@ -80,5 +77,27 @@ public class Voo {
 	}
 	public void setHorario(String horario) {
 		this.horario = horario;
+	}
+	
+	//metodos get e set do atributo assentos
+	public boolean[] getAssentos() {
+		return assentos;
+	}
+	public void setAssentos(boolean assentos[]) {
+		this.assentos = assentos;
+	}
+	
+	//metodo que define todos os assentos do voo com true, ou seja disponíveis
+	private void geraAssentos() {
+		int i;
+		for(i=0;i<NUM_ASSENTOS;i++) {
+			this.assentos[i] = true;
+		}
+	}
+	
+	
+	@Override
+	public int hashCode() {
+		return this.destino.hashCode();
 	}
 }
