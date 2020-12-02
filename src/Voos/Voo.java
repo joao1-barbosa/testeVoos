@@ -131,7 +131,7 @@ public class Voo {
 	@Override
 	public int hashCode() {
 		return this.origem.hashCode() + this.destino.hashCode() 
-		+ this.data.hashCode() + this.horario.hashCode();
+		+ this.data.hashCode();
 	}
 	
 	@Override
