@@ -25,7 +25,7 @@ public class Voo {
 	private boolean assentos[] = new boolean[NUM_ASSENTOS];
 	
 	
-	//metodos contrutores da classe
+	//metodos contrutores
 	public Voo(String origem, String destino, double valorPassagem, String data, String horario) {
 		this.origem = origem;
 		this.destino = destino;
@@ -36,6 +36,9 @@ public class Voo {
 	}
 	public Voo(String origem, String destino, double valorPassagem, String horario) {
 		this(origem,destino,valorPassagem, null, horario);
+	}
+	public Voo(String origem, String destino, String data) {
+		this(origem,destino, 0, data, null);
 	}
 	
 	
@@ -87,18 +90,11 @@ public class Voo {
 		this.assentos = assentos;
 	}
 	
-	//metodo que define todos os assentos do voo com true, ou seja disponíveis
-	private void geraAssentos() {
-		int i;
-		for(i=0;i<NUM_ASSENTOS;i++) {
-			this.assentos[i] = true;
-		}
-	}
-	
 	//metodo que retorna a quantidade de assentos disponiveis
 	public int numAssentosDisponiveis() {
 		int i;
 		int numAssentos=0;
+		
 		for(i=0;i<NUM_ASSENTOS;i++) {
 			if(this.assentos[i])
 				numAssentos++;
@@ -107,10 +103,35 @@ public class Voo {
 		return numAssentos;
 	}
 	
+	public void vendeAssentos(int numPoltrona) {
+		this.assentos[numPoltrona] = false;
+	}
+	public void vendeAssentos(int qtd, int numPoltronas[]) {
+		int i;
+		for(i=0;i<qtd;i++) {
+			if(numPoltronas[i]<1 || numPoltronas[i]>60) {
+				System.out.printf("\nErro ao selecionar poltrona: Os números dos assentos devem estar entre 1 e 60\n");
+			}else if(!this.assentos[numPoltronas[i]-1]) {
+				System.out.printf("\nErro ao selecionar poltrona: O assento %d está Indisponível.\n", numPoltronas[i]);
+			}else {
+				this.assentos[numPoltronas[i]-1] = false;
+			}
+		}
+	}
+	
+	//metodo que define todos os assentos do voo com true, ou seja disponíveis
+	private void geraAssentos() {
+		int i;
+		for(i=0;i<NUM_ASSENTOS;i++) {
+			this.assentos[i] = true;
+		}
+	}
+	
 	
 	@Override
 	public int hashCode() {
-		return this.horario.hashCode();
+		return this.origem.hashCode() + this.destino.hashCode() 
+		+ this.data.hashCode() + this.horario.hashCode();
 	}
 	
 	@Override
@@ -122,7 +143,8 @@ public class Voo {
 			return false;
 		
 		Voo other = (Voo) o;
-		return this.horario.equals(other.horario);
+		return this.origem.equals(other.destino) && this.destino.equals(other.destino)
+				&& this.data.equals(other.data) && this.horario.equals(other.horario);
 	}
 	
 	@Override
