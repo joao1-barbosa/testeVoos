@@ -115,7 +115,7 @@ public class Voo {
 	}
 	public void vendeAssentos(int qtd, int numPoltronas[]) {
 		/**vende mais de um assento, recebendo como parâmetro o número de poltronas que serão vendidas 
-		 *e o número das mesmas dentro do vetor numPoltronas
+		 *e o número das mesmas no avião, através do vetor numPoltronas
 		 */
 		int i;
 		for(i=0;i<qtd;i++) {

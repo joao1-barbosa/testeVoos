@@ -46,4 +46,17 @@ public class VooRepository {
 			System.out.printf("\nErro ao cadastrar novo Voo.\n");
 		}
 	}
+
+	//Métodos sobrecarregados para venda de passagens
+	public void vendePassagem(Voo objVoo, int numPoltrona) {
+		//vende uma única passagem, recebendo como parâmetro o número do assento
+		this.voos.get(objVoo.hashCode()).vendeAssentos(numPoltrona);
+	}
+	public void vendePassagem(Voo objVoo, int qtd, int numPoltrona[]) {
+		/**vende mais de uma passagem, recebendo como parâmetro o número de poltronas que serão vendidas 
+		 *e o número das mesmas no avião, através do vetor numPoltronas
+		 */
+		this.voos.get(objVoo.hashCode()).vendeAssentos(qtd, numPoltrona);
+	}
+	
 }
