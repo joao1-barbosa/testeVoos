@@ -29,7 +29,7 @@ public class VooTester {
 		}
 	}
 	
-  	//metodo que verifica se o destino é válido
+  	//metodo que verifica se o destino é válido.
 	public boolean validaDestino(String destino) {
 		if(verificaNulidade(destino)) {
 			return true;
